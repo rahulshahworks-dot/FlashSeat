@@ -39,18 +39,20 @@ FlashSeat handles sudden traffic spikes during flash sales and concert ticket bo
 ---
 
 ## System Workflow
+```text
 [Incoming Request]
-  │
-  ▼
+        │
+        ▼
 [Traffic Monitor (Redis INCR Window)]
-├── Normal Traffic  ──> [Direct Admission Token]
-└── Burst Spike     ──> [ZSet Waiting Room] ──(SSE Stream)──> [Admitted in Batches]
-  │
-  ▼
-[Seat Validation (Physical DB Check)]
-  │
-  ▼
-[Atomic Multi-Seat Lock (Redis Lua)]
-  │
-  ▼
-[Persistent Booking (PostgreSQL ACID)]
+   ├── Normal Traffic  ──> [Direct Admission Token]
+   └── Burst Spike     ──> [ZSet Waiting Room] ──(SSE Stream)──> [Admitted in Batches]
+                                                                          │
+                                                                          ▼
+                                                         [Seat Validation (Physical DB Check)]
+                                                                          │
+                                                                          ▼
+                                                         [Atomic Multi-Seat Lock (Redis Lua)]
+                                                                          │
+                                                                          ▼
+                                                         [Persistent Booking (PostgreSQL ACID)]
+```
