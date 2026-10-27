@@ -23,9 +23,6 @@ FlashSeat handles sudden traffic spikes during flash sales and concert ticket bo
    - **Volatile Truth:** Active holds exist solely as Redis TTL keys, auto-expiring without complex background sync jobs.
    - **Edge Validation:** Physical layout verification filters out ghost/invalid seat inputs prior to acquiring distributed locks.
 
-4. **Java 21 Virtual Threads Verification**
-   - Validated using an internal load simulator powered by Project Loom's `Executors.newVirtualThreadPerTaskExecutor()`, reproducing real-world burst concurrency.
-
 ---
 
 ## Tech Stack
